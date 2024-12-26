@@ -2,6 +2,12 @@ from fastapi import FastAPI
 import web.explorer
 import web.creature
 
+import asyncio
+import sys
+
+if sys.platform == "win32":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 app = FastAPI()
 
 app.include_router(web.explorer.router)

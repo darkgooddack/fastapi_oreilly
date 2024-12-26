@@ -1,9 +1,11 @@
-from pydantic import BaseModel
+from data.database import Base
+from sqlalchemy import Column, String
 
+class Creature(Base):
+    __tablename__ = 'creatures'
 
-class Creature(BaseModel):
-    name: str
-    country: str
-    area: str
-    description: str
-    aka: str
+    name = Column(String, primary_key=True)
+    country = Column(String)
+    area = Column(String)
+    description = Column(String)
+    aka = Column(String)
