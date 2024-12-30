@@ -3,6 +3,7 @@ from starlette.responses import RedirectResponse
 
 import web.explorer
 import web.creature
+import web.user
 
 import asyncio
 import sys
@@ -14,6 +15,7 @@ app = FastAPI()
 
 app.include_router(web.explorer.router)
 app.include_router(web.creature.router)
+app.include_router(web.user.router)
 
 
 @app.get("/")

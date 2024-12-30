@@ -20,4 +20,4 @@ class Creature(BaseModel):
     aka: str | None
 
     class Config:
-        from_orm = True
+        from_attributes  = True
