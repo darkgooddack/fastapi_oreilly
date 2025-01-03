@@ -1,6 +1,13 @@
+import os
 from fastapi import APIRouter
 from model.creature import Creature
 import fake.creature as service
+
+if os.getenv("CRYPTIC_UNIT_TEST"):
+    from fake import creature as service
+else:
+    from service import creature as service
+
 
 router = APIRouter(
     prefix="/creature",

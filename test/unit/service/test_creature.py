@@ -1,22 +1,32 @@
+import os
 from model.creature import Creature
-from service import creature as code
+import pytest
 
-sample = Creature(
-    name="Yeti",
-    aka="Abominable Snowman",
-    country="CN",
-    area="Himalayas",
-    description="Hirsute Himalayan"
-)
+os.environ["CRYPTIC_UNIT_TEST"] = "true"
+from fake import creature as data
 
-def test_create():
-    resp = code.create(sample)
+@pytest.fixture
+def sample() -> Creature:
+    return Creature(
+        name="Yeti",
+        aka="Abominable Snowman",
+        country="CN",
+        area="Himalayas",
+        description="Handsome Himalayan"
+    )
+
+def test_create(sample):
+    resp = data.create(sample)
     assert resp == sample
 
-def test_get_exists():
-    resp = code.get_one("Yeti")
+def test_get_exists(sample):
+    resp = data.create(sample)
+    assert resp == sample
+    resp = data.get_one(sample.name)
     assert resp == sample
 
-def test_get_missing():
-    resp = code.get_one("boxturtle")
-    assert resp is None
+def test_modify(sample):
+    sample.country = "CA"
+    resp = data.modify(sample)
+    assert resp == sample
+

@@ -1,5 +1,4 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
-
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     DB_HOST: str
@@ -7,6 +6,7 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_NAME: str
     DB_PASS: str
+    CRYPTIC_UNIT_TEST: str | None = None
 
     @property
     def DATABASE_URL_asyncpg(self):
@@ -16,6 +16,9 @@ class Settings(BaseSettings):
     def DATABASE_URL_psycopg(self):
         return f"postgresql+psycopg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = {
+        "env_file": ".env"
+    }
+
 
 settings = Settings()

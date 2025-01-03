@@ -1,5 +1,11 @@
+import os
 from model.creature import Creature
 import fake.creature as data
+
+if os.getenv("CRYPTID_UNIT_TEST"):
+    from fake import creature as data
+else:
+    from data import creature as data
 
 def get_all() -> list[Creature]:
     return data.get_all()
@@ -10,11 +16,11 @@ def get_one(name: str) -> Creature | None:
 def create(creature: Creature) -> Creature:
     return data.create(creature)
 
-def replace(id, creature: Creature) -> Creature:
-    return data.replace(id, creature)
+def replace(creature: Creature) -> Creature:
+    return data.replace(creature)
 
-def modify(id, creature: Creature) -> Creature:
-    return data.modify(id, creature)
+def modify(creature: Creature) -> Creature:
+    return data.modify(creature)
 
-def delete(id, creature: Creature) -> bool:
-    return data.delete(id)
+def delete(name: str) -> bool:
+    return data.delete(name)

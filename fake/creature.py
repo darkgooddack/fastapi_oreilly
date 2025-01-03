@@ -7,7 +7,7 @@ _creatures = [
         aka="Abominable Snowman",
         country="CN",
         area="Himalayas",
-        description="Hirsute Himalayan"
+        description="Handsome Himalayan"
     ),
     Creature(
         name="Bigfoot",
@@ -22,7 +22,7 @@ def get_all() -> list[Creature]:
     """Возврат всех существ"""
     return _creatures
 
-def get_one(name: str)->Creature | None:
+def get_one(name: str) -> Creature | None:
     """Возврат одного существа"""
     for _creature in _creatures:
         if _creature.name == name:
@@ -30,20 +30,19 @@ def get_one(name: str)->Creature | None:
     return None
 
 # примеры ниже пока не функциональны
-
-def create(creature: Creature)->Creature:
+def create(creature: Creature) -> Creature:
     """Добавить существо"""
     return creature
 
-def modify(creature: Creature)->Creature:
+def modify(creature: Creature) -> Creature:
     """Частичное изменение записи существа"""
     return creature
 
-def replace(creature: Creature)->Creature:
+def replace(creature: Creature) -> Creature:
     """Полная замена записи существа"""
     return creature
 
-def delete(name: str):
+def delete(name: str) -> bool | None:
     """Удаление записи существа; возврат значения None,
     если запись существовала"""
     return None

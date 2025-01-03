@@ -13,5 +13,6 @@ class User(BaseModel):
     name: str
     hash: str | None
 
-    class Config:
-        from_attributes  = True
+    model_config = {
+        "from_attributes": True
+    }
