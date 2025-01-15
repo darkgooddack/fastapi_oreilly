@@ -3,6 +3,9 @@ from fastapi import APIRouter
 from model.creature import Creature
 import fake.creature as service
 
+from fastapi import Response
+import plotly.express as px
+
 if os.getenv("CRYPTIC_UNIT_TEST"):
     from fake import creature as service
 else:
@@ -21,6 +24,13 @@ def get_all() -> list[Creature]:
 @router.get("/{name}")
 def get_one (name) -> Creature:
     return service.get_one(name)
+
+@router.get("/test")
+def test():
+    df = px.data.iris()
+    fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
+    fig_bytes = fig.to_image(format="png")
+    return Response(content=fig_bytes, media_type="image/png")
 
 # все остальные конечные точки пока ничего не делают:
 
